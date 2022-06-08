@@ -28,7 +28,7 @@ router.get("/:id", async (req, res) => {
   try {
     const chirp = await db.getOne(id);
     if (chirp.length) {
-      res.json(chirp);
+      res.json(chirp[0]);
     } else {
       res.status(400).json({ message: "You are looking for a chirp that doesn't exist. Stop that." });
     }
