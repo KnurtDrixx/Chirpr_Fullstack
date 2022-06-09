@@ -45,8 +45,8 @@ router.post("/", async (req, res) => {
   const newChirpInfo = { user_id: 1, content, location };
   //user_id:number; content:string; location:string;
   try {
-    const chirp = await db.createOne(newChirpInfo);
-    res.json(chirp);
+    const DBres = await db.createOne(newChirpInfo);
+    res.json(DBres);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "A createOne error occurred" });

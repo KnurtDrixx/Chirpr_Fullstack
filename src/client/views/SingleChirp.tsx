@@ -8,6 +8,21 @@ const SingleChirp = () => {
   const [chirp, setChirp] = useState<Chirps>(null);
   const { id } = useParams();
 
+  const deleteChirp = () => {
+    fetch(`/api/chirpevent/${id}`, {
+      method: "DELETE",
+      // headers: { "content-type": "application/json" },
+      // body: JSON.stringify({ content: chirpContent, location: chirpLocation }),
+    })
+      .then((res) => res.json())
+      .then((message) => {
+        console.log(message);
+        alert(`Chirp ${id} has been found and destroyed`);
+        nav(`/Chirps`);
+      })
+      .catch((err) => console.log(err));
+  };
+
   useEffect(() => {
     fetch(`/api/chirpevent/${id}`)
       .then((res) => res.json())
@@ -30,6 +45,13 @@ const SingleChirp = () => {
           </div>
         </div>
         <button onClick={() => nav(`/Chirps/${id}/edit`)}>Edit Chirp?</button>
+        <button
+          onClick={() => {
+            deleteChirp();
+          }}
+        >
+          Wouldst tho Delete Chirp?
+        </button>
       </div>
     );
   } ///bad stuff
